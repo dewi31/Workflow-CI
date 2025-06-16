@@ -30,7 +30,7 @@ def svm_train(data, target_column, test_size=0.2, random_state=42):
     return model, accuracy
 
 if __name__ == "__main__":
-    mlflow.set_tracking_uri("http://127.0.0.1:5000/")
+
     data = pd.read_csv("loan_preprocessing.csv")
     
     model, acc = svm_train(
