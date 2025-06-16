@@ -7,3 +7,4 @@ entry_points:
       kernel: {type: string, default: rbf}
       C: {type: int, default: 10}
       dataset: {type: string, default: "loan_preprocessing.csv"}
+    command: "python model.py {kernel} {C} {dataset}"
