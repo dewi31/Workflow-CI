@@ -3,10 +3,9 @@ from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import mlflow
+from mlflow import sklearn
 
 def svm_train(data, target_column, test_size=0.2, random_state=42):
-    # Setup experiment
-    mlflow.set_experiment("Loan_Approval_SVM")
     
     # Split data
     X = data.drop(columns=[target_column])
@@ -17,15 +16,18 @@ def svm_train(data, target_column, test_size=0.2, random_state=42):
     
     # Start run
     with mlflow.start_run(run_name="SVM_Loan_Approval"):
-        # Aktifkan autolog
-        mlflow.autolog()
         
         # Train model
         model = SVC(probability=True, random_state=random_state)
         model.fit(X_train, y_train)
         
+        sklearn.log_model(
+        sk_model=model,
+        artifact_path="model"
+        )
         # Evaluasi 
         accuracy = model.score(X_test, y_test)
+        mlflow.log_metric("accuracy", float(accuracy))
         
     return model, accuracy
 
