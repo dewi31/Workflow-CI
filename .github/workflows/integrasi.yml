@@ -1,4 +1,4 @@
-name: CI/CD MLflow
+name: Integrasi
 
 on:
   push:
@@ -46,7 +46,7 @@ jobs:
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
           echo "Latest run_id: $RUN_ID"
 
-      # UPLOAD KE GITHUB TERLEBIH DAHULU
+      # Github
       - name: Upload to GitHub
         run: |
           # Konfigurasi Git
@@ -73,7 +73,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
-      # LANGKAH DOCKER SETELAH UPLOAD KE GITHUB
+      # Docker
       # Build Docker Model
       - name: Build Docker Model
         run: |
